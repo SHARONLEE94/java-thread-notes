@@ -1,0 +1,49 @@
+### Maven / Java ###
+**/target/
+**/build/
+!.mvn/wrapper/maven-wrapper.jar
+# (mvnw 스크립트들은 커밋 대상이므로 무시하지 않음)
+
+# Logs & dumps
+*.log
+spring.log
+hs_err_pid*.log
+replay_pid*.log
+*.hprof
+
+# Env / secrets (필요시)
+*.env
+*.env.*
+*.keystore
+*.p12
+
+### IDE ###
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# STS / Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+### OS ###
+.DS_Store
+Thumbs.db
