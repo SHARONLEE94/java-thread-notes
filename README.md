@@ -1,132 +1,242 @@
-#  java-thread-notes
-## 📌 개요
+# java-thread-notes
 
-이 레포는 **자바 쓰레드 학습 기록**을 정리하기 위한 공간입니다.
-특히 자바의 정석 4판에서 다루기 시작한 **가상 쓰레드(Virtual Thread)** 개념을 계기로,
-멀티스레드와 동시성 프로그래밍이 앞으로 성능 확장의 핵심이 될 것이라 판단하여
-체계적으로 연습하고 기록하기 위해 시작했습니다.
+## 📌 레포 개요
+
+이 레포는 자바 쓰레드 학습 기록을 정리하기 위한 공간입니다.
+특히 자바의 정석 4판에서 본격적으로 다루기 시작한 가상 쓰레드(Virtual Thread) 개념을 계기로,
+
+> 멀티스레드와 동시성 프로그래밍은 앞으로 성능 확장의 핵심이다
+
+라고 판단해 체계적으로 실습하고 기록하고자 만들었습니다.
+
+단순 이론 정리를 넘어서,
+### 📌 직접 코드로 실험하고 문제를 해결하는 과정 자체를 기록하는 것을 목표로 합니다.
 
 ---
 ## 🎯 학습 목표
 
-- 기본 쓰레드 생성 및 실행 (Thread, Runnable)
+- 기본 쓰레드 생성 및 실행 (Thread, Runnable, Callable)
 
-- 쓰레드 제어 (우선순위, sleep, join, interrupt 등)
+- 쓰레드 제어 기초 (sleep, join, interrupt)
 
-- 동기화 (synchronized, lock, wait/notify)
+- 동기화 (synchronized, ReentrantLock, wait/notify)
 
-- 스레드 풀(Executor Framework)
+- Executor Framework (FixedThreadPool, CachedThreadPool)
 
-- 가상 쓰레드(Virtual Thread) 개념 및 활용
+- Virtual Thread (newVirtualThreadPerTaskExecutor)
+
+- CPU-bound / IO-bound 분류와 전략
+
+- 실전 API 호출 테스트로 동시성 이해
+
+- Virtual vs Platform 쓰레드 성능 실험
 
 ---
+
 ## 📝 기록 방식
-- 각 주제별 예제 코드 + 간단한 설명
-
-- 배운 점과 주의할 점은 /notes 폴더에 정리
-
----
-## 🚀 앞으로의 방향
-- 기존 쓰레드와 가상 쓰레드 성능 비교 실험
-
-- 실제 프로젝트 코드에 적용할 수 있는 패턴 생각
-
----
-## 🗂️ 레포 구조 (java-thread-notes)
-
 ```text
-📁 java-thread-notes/
-├─ README.md
-├─ notes/                      # 문제별 메모 (요약)
-│  ├─ 1-thread/
-│  ├─ 2-sync/
-│  ├─ 3-virtual/
-│  └─ 4-executor/
-├─ src/
-│  └─ main/java/com/example/threadnotes/
-│     ├─ common/              # 공통 유틸(타이머, 로거 등)
-│     ├─ s1_thread/           # 1. 쓰레드
-│     │  ├─ S1_01_ProcessVsThread.java
-│     │  ├─ S1_02_ThreadImpl.java
-│     │  ├─ S1_03_StartVsRun.java
-│     │  ├─ S1_04_SingleVsMulti.java
-│     │  ├─ S1_05_Priority.java
-│     │  ├─ S1_06_ThreadGroup.java
-│     │  ├─ S1_07_Daemon.java
-│     │  └─ S1_08_Scheduling.md         # 설명만 필요한 항목은 md
-│     ├─ s2_sync/             # 2. 동기화
-│     │  ├─ S2_01_Synchronized.java
-│     │  ├─ S2_02_WaitNotify.java
-│     │  ├─ S2_03_LockCondition.java
-│     │  ├─ S2_04_Volatile.java
-│     │  └─ S2_05_ForkJoin.java
-│     ├─ s3_virtual/          # 3. 가상 쓰레드
-│     │  ├─ S3_01_WhatIsVirtual.java
-│     │  ├─ S3_02_CreateAndUse.java
-│     │  ├─ S3_03_Features.java
-│     │  ├─ S3_04_PlatFormVsVirtual.java
-│     │  ├─ S3_05_Patterns.java
-│     │  └─ S3_06_Cautions.java
-│     └─ s4_executor/         # 4. Executor/ExecutorService
-│        ├─ S4_01_Executor.java
-│        ├─ S4_02_ThreadFactory.java
-│        ├─ S4_03_ExecutorService.java
-│        ├─ S4_04_ThreadPool.java
-│        ├─ S4_05_Future.java
-│        └─ S4_06_CompletableFuture.java
-└─ pom.xml
+/src
+/virtual_thread       → 가상 쓰레드 예제
+/platform_thread      → 기존 쓰레드 예제
+/benchmark            → 실제 성능 실험 코드
+/utils                → StopWatch, ApiClient 등 공통 유틸
+/notes
+→ 실험 결과 및 트러블슈팅 기록
+README.md
 ```
 
+## 🚀 앞으로의 방향
+
+- 기존 플랫폼 스레드와 가상 스레드의 성능 비교 정리
+
+- IO-bound 상황에서 가상 스레드의 장점 실험
+
+- WAS(Tomcat) + Virtual Thread 연동 실험
+
+- 실전 프로젝트에 접목할 패턴 연구
+
+- JMH 기반 벤치마크도 도입 예정
+
 ---
-## ✅ 진행 체크리스트
-[ ] 1.1 프로세스와 쓰레드?
 
-[ ] 1.2 쓰레드 구현과 실행
+## ⚡ Virtual Thread & Platform Thread 성능 실험 정리
 
-[ ] 1.3 start()와 run()
+아래 내용은 실제로 테스트하면서 발생한 문제, 원인, 해결 과정 등을
+정확한 기록 형태로 정리한 것입니다.
 
-[ ] 1.4 싱글/멀티스레드
+---
 
-[ ] 1.5 우선순위
+## 📍 실험 목표
 
-[ ] 1.6 쓰레드 그룹
+- 동일한 API 엔드포인트에 대량 요청을 보내고 Virtual Thread와 Platform Thread의 성능 차이를 확인한다.
 
-[ ] 1.7 데몬 쓰레드
+- 동시성 증가 시 어떤 문제가 발생하는지 체험한다.
 
-[ ] 1.8 쓰레드의 선점(스케줄링)
+- Virtual Thread의 한계점(특히 OS 자원 측면)을 이해한다.
 
-[ ] 2.1 synchronized 동기화
+---
 
-[ ] 2.2 wait()/notify()
+## 📡 실험 환경
+| 항목                       | 값                                   |
+| ------------------------ | ----------------------------------- |
+| JDK                      | 21                                  |
+| SpringBoot mock server   | /mock (200ms sleep)                 |
+| API 클라이언트                | `HttpClient`                        |
+| Virtual Thread Executor  | `newVirtualThreadPerTaskExecutor()` |
+| Platform Thread Executor | `newFixedThreadPool(200)`           |
 
-[ ] 2.3 Lock과 Condition
+---
 
-[ ] 2.4 volatile
+## ❗ 트러블슈팅 기록
+### ❗ 문제 1: Virtual Thread가 10,000 요청에서 터짐
+✔ 증상
+```text
+CALL_COUNT = 10,000 이상에서
+java.net.ConnectException, ClosedChannelException 발생.
+```
 
-[ ] 2.5 fork & join
+✔ 원인
+```text
+1. Virtual Thread는 매우 빠르게 다량의 "동시 connect()"를 수행한다.
+2. 그러나 OS의 Ephemeral Port는 개수가 한정되어 있고,
+3. 포트 재사용까지 수 초~수 분이 걸린다.
+4. 너무 많은 connect()가 동시에 시도되면
+    → 포트 고갈 발생
+    → ConnectException 발생
+```
 
-[ ] 3.1 가상 쓰레드란?
+✔ 핵심 결론
 
-[ ] 3.2 가상 쓰레드 생성과 사용
- 
-[ ] 3.3 가상 쓰레드의 특징
+Virtual Thread는 빠르지만 네트워크(포트) 제한을 초과하면 터진다.
 
-[ ] 3.4 플랫폼 쓰레드 vs 가상 쓰레드
+---
 
-[ ] 3.5 가상 쓰레드 상태
+### ❗ 문제 2: Platform Thread는 되는데 Virtual Thread만 터짐
 
-[ ] 3.6 가상쓰레드 작성시 주의사항
+```text
+Platform Thread의 쓰레드풀은 200개.
+→ 동시 connect() 시도가 200개로 제한됨.
 
-[ ] 3.6 Continuation과 StackChunk
+Virtual Thread는 사실상 무제한 생성됨.
+→ 동시 connect()가 수천 개가 됨.
 
-[ ] 4.1 Executor
+✔ 동시 TCP 충돌의 규모 자체가 달라서
+Virtual Thread가 먼저 터지는 것이 정상이다.
+```
+---
+## 🔧 해결: Batch 처리 전략
 
-[ ] 4.2 ThreadFactory
+Virtual Thread에서 포트 고갈을 피하는 가장 간단한 해결책은 배치로 나누는 것이다.
 
-[ ] 4.3 ExecutorService
+예)
 
-[ ] 4.4 스레드풀(ThreadPool)
+6000개 × 10번 → 총 60000 요청
 
-[ ] 4.5 Future
+배치 사이에 포트가 반납될 시간이 생긴다.
 
-[ ] 4.6 CompletableFuture
+---
+
+## ✔ 배치 구조 코드
+```java
+for (int batch = 0; batch < BATCH_COUNT; batch++) {
+
+    List<Future<String>> futures = new ArrayList<>();
+
+    for (int i = 0; i < BATCH_SIZE; i++) {
+        futures.add(executor.submit(() -> ApiClient.get(URL)));
+    }
+
+    for (Future<String> f : futures) {
+        f.get();
+    }
+
+    System.out.println("Batch " + (batch + 1) + " 완료");
+}
+
+```
+---
+## ⏱ StopWatch 적용 (리팩토링)
+
+기존 System.currentTimeMillis() 대신 직접 만든 StopWatch 클래스로 성능 측정 간소화.
+```java
+StopWatch sw = StopWatch.startNew();
+...
+sw.stop();
+System.out.println("Total: " + sw.getElapsedMillis());
+
+```
+---
+
+## 📊 Virtual vs Platform 성능 비교 결과
+| 항목       | Platform Thread | Virtual Thread   |
+| -------- | --------------- | ---------------- |
+| 동시 요청 처리 | 쓰레드풀에 의해 제한     | 사실상 무제한          |
+| 속도       | 상대적으로 느림        | 매우 빠름            |
+| 실패 가능성   | 낮음              | 포트 고갈로 실패 가능     |
+| 해결책      | 필요 없음           | Batch 필수         |
+| 총 처리량    | 낮음              | Batch 적용 시 매우 높음 |
+
+---
+
+## 🔍 테스트 흐름 다이어그램
+### 1) 성능 측정 전체 흐름
+```mermaid
+sequenceDiagram
+    participant Tester as Benchmark
+    participant Exec as ExecutorService
+    participant VT as Thread
+    participant API as Mock Server
+
+    Tester->>Exec: submit(task)
+    Exec->>VT: execute ApiClient.get()
+    VT->>API: HTTP GET /mock
+    API-->>VT: OK (200ms)
+    VT-->>Exec: Future 완료
+    Exec-->>Tester: f.get() 결과 반환
+
+```
+---
+
+### 2) Virtual Thread Batch 흐름
+
+```mermaid
+   flowchart TD
+
+A[Start] --> B{Batch 반복}
+B -->|1| C[6000개 요청 생성]
+C --> D[future.get()로 대기]
+D --> E[Batch 완료 출력]
+E --> B
+B -->|끝| F[Total 시간 측정]
+```
+---
+## 📎 참고 파일 요약
+| 파일명                        | 역할                              |
+| -------------------------- | ------------------------------- |
+| `ApiClient`                | HttpClient GET 요청               |
+| `StopWatch`                | 성능 측정 유틸                        |
+| `VirtualApiBatchTest`      | Batch 기반 Virtual Thread 부하 테스트  |
+| `PlatformApiBatchTest`     | Batch 기반 Platform Thread 부하 테스트 |
+| `VirtualApiPerRequestTest` | 개별 요청 시간 측정용                    |
+| `CsvLogger`                | 그래프 분석용 CSV export              |
+
+---
+## 🎉 마무리
+
+이 레포는 단순히 쓰레드를 배우는 공간이 아니라,  실제로 문제를 만나고 해결하면서 동시성을 이해하는 학습 기록을 남기는 공간이다.
+
+Virtual Thread는 "빠르다"만 알고 있으면 절반만 아는 것이다.
+실제로 테스트해보면, 빠른 만큼 OS 리소스를 너무 빠르게 소모해버릴 수도 있다.
+
+이번 레포는 이것을 몸으로 이해한 중요한 기록이라고 생각한다.
+
+추가로,
+
+1. JMH 벤치마킹
+
+2. Tomcat + Virtual Thread 실험
+
+3. DB Pool + Virtual Thread 실험
+
+
+까지 확장해서 이 레포를 완성할 예정이다.
