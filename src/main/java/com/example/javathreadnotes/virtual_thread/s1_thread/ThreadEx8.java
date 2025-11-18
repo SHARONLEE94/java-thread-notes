@@ -1,4 +1,4 @@
-package com.example.javathreadnotes.s1_thread;
+package com.example.javathreadnotes.virtual_thread.s1_thread;
 
 public class ThreadEx8 {
     public static void main(String[] args) {

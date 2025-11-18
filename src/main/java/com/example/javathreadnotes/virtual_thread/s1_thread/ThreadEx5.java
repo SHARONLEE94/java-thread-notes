@@ -1,4 +1,4 @@
-package com.example.javathreadnotes.s1_thread;
+package com.example.javathreadnotes.virtual_thread.s1_thread;
 
 /*
 * 메인 스레드(main)와 새로 만든 작업 스레드(ThreadEx5_1)가

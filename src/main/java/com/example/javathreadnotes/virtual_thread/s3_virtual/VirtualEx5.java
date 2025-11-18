@@ -1,4 +1,4 @@
-package com.example.javathreadnotes.s3_virtual;
+package com.example.javathreadnotes.virtual_thread.s3_virtual;
 
 // 컨텍스트 스위칭
 // 여기는 결과가 이상함. 확인이 필요

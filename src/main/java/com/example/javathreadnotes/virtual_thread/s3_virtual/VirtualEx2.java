@@ -1,4 +1,4 @@
-package com.example.javathreadnotes.s3_virtual;
+package com.example.javathreadnotes.virtual_thread.s3_virtual;
 
 
 public class VirtualEx2 {

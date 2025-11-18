@@ -1,4 +1,4 @@
-package com.example.javathreadnotes.s1_thread;
+package com.example.javathreadnotes.virtual_thread.s1_thread;
 
 /*
 * "새로운 스레드" 내에서 예외가 발생하고 처리되는 방식

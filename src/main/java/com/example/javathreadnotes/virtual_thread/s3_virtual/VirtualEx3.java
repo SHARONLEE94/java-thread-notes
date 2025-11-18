@@ -1,4 +1,4 @@
-package com.example.javathreadnotes.s3_virtual;
+package com.example.javathreadnotes.virtual_thread.s3_virtual;
 
 // 최대로 생성할 수 있는 "플랫폼 쓰레드"의 수를 알아내기 위한 것
 /** 내 pc 결과

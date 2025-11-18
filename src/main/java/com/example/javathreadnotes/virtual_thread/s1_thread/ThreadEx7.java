@@ -1,4 +1,4 @@
-package com.example.javathreadnotes.s1_thread;
+package com.example.javathreadnotes.virtual_thread.s1_thread;
 
 /*
 * 멀티 스레드를 이용한 I/O 블로킹(Blocking) 해결

@@ -1,4 +1,4 @@
-package com.example.javathreadnotes.s1_thread;
+package com.example.javathreadnotes.virtual_thread.s1_thread;
 
 /*
 * ThreadEx를 구현하는 방법 2가지

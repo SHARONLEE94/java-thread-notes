@@ -1,4 +1,4 @@
-package com.example.javathreadnotes.s1_thread;
+package com.example.javathreadnotes.virtual_thread.s1_thread;
 
 /*
 * 새로운 스레드가 생성되지 않고 main 스레드에서 일반 메서드처럼 실행
